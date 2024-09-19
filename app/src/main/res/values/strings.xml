@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ToDoBebas</string>
-    <string name="Judul">
+    <string name="Judul"></string>
+    <string name="title_activity_todo">TodoActivity</string>
 </resources>

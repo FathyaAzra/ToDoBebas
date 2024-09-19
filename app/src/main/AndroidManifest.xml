@@ -13,6 +13,11 @@
         android:theme="@style/Theme.ToDoBebas"
         tools:targetApi="31">
         <activity
+            android:name=".TodoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_todo"
+            android:theme="@style/Theme.ToDoBebas" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
