@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_tugas"
+        android:icon="@drawable/tugas_selector"
+        android:title="@string/title_tugas" />
+
+    <item
+        android:id="@+id/navigation_kalender"
+        android:icon="@drawable/kalender_selector"
+        android:title="@string/title_kalender" />
+
+    <item
+        android:id="@+id/navigation_statistik"
+        android:icon="@drawable/statistik_selector"
+        android:title="@string/title_statistik" />
+
+</menu>

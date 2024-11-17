@@ -2,4 +2,11 @@
     <string name="app_name">ToDoBebas</string>
     <string name="Judul"></string>
     <string name="title_activity_todo">TodoActivity</string>
+    <string name="title_activity_navigation">navigation</string>
+    <string name="title_tugas">Tugas</string>
+    <string name="title_kalender">Kalender</string>
+    <string name="title_statistik">Statistik</string>
+    <string name="kalender">Kalender</string>
+    <string name="statistik">Statistik</string>
+    <string name="tugas">Tugas</string>
 </resources>
