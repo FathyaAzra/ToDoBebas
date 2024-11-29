@@ -9,18 +9,15 @@ import androidx.room.Update
 
 @Dao
 interface NotificationDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNotification(notification: Notification)
+    @Query("SELECT * FROM notifications")
+    fun getAll():List<Notification>
 
-    @Query("SELECT * FROM notifications WHERE todo_id = :todoId")
-    suspend fun getNotificationsForTodo(todoId: Int): List<Notification>
+    @Insert
+    fun insertAll(vararg transaction: Notification)
 
     @Delete
-    suspend fun deleteNotification(notification: Notification)
-
-    @Query("DELETE FROM notifications WHERE todo_id = :todoId")
-    suspend fun deleteNotificationsForTodo(todoId: Int)
+    fun delete(transaction: Notification)
 
     @Update
-    suspend fun updateNotification(notification: Notification)
+    fun update(vararg transaction: Notification)
 }
