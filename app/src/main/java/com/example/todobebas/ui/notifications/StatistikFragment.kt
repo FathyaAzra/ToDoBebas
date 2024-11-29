@@ -8,20 +8,20 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.todobebas.databinding.FragmentStatistikBinding
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 
 class StatistikFragment : Fragment() {
 
     private var _binding: FragmentStatistikBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         val statistikViewModel =
             ViewModelProvider(this).get(StatistikViewModel::class.java)
 
@@ -32,7 +32,23 @@ class StatistikFragment : Fragment() {
         statistikViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        // Initialize the PieChart
+        val pieChart: PieChart = binding.chart
+        setupPieChart(pieChart)
+
         return root
+    }
+
+    private fun setupPieChart(pieChart: PieChart) {
+        val entries = ArrayList<PieEntry>()
+        entries.add(PieEntry(40f, "Category 1"))
+        entries.add(PieEntry(60f, "Category 2"))
+
+        val dataSet = PieDataSet(entries, "Statistics")
+        val pieData = PieData(dataSet)
+        pieChart.data = pieData
+        pieChart.invalidate() // Refresh the chart
     }
 
     override fun onDestroyView() {

@@ -5,11 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StatisticsActivity">
+    tools:context=".StatistikFragment">
 
+    <!-- PieChart for displaying statistics -->
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- TextView to display some stats (Optional) -->
+    <TextView
+        android:id="@+id/textNotifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stats Here"
+        android:padding="16dp"
+        android:textSize="18sp"/>
 </LinearLayout>

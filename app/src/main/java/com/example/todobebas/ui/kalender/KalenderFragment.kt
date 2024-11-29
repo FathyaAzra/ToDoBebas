@@ -12,16 +12,12 @@ import com.example.todobebas.databinding.FragmentKalenderBinding
 class KalenderFragment : Fragment() {
 
     private var _binding: FragmentKalenderBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         val kalenderViewModel =
             ViewModelProvider(this).get(KalenderViewModel::class.java)
 
