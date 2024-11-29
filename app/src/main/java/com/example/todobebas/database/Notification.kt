@@ -14,13 +14,13 @@ import java.io.Serializable
         childColumns = ["todo_id"],
         onDelete = ForeignKey.CASCADE
     )],
-    indices = [Index(value = ["todo_id"])] // Index for faster lookups
+    indices = [Index(value = ["todo_id"])]
 )
 data class Notification(
     @PrimaryKey(autoGenerate = true) val notif_id: Int,
-    val todo_id: Int, // Foreign key
-    val notif_type: String, // Notification type (e.g., "7d", "3d", "1h")
-    val notif_time: Long, // Timestamp for when the notification should trigger
-    val is_active: Boolean = true // Whether the notification is enabled
+    val todo_id: Int,
+    val notif_type: String,
+    val notif_time: Long,
+    val is_active: Boolean = true
 )
 
