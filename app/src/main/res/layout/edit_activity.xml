@@ -61,6 +61,7 @@
                     android:src="@drawable/kalender_pic" />
 
                 <TextView
+                    android:id="@+id/tv_selected_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -68,50 +69,60 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     />
-
                 <Button
-                    android:id="@+id/btnWaktu"
+                    android:id="@+id/btnSetTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="120dp"
                     android:text="Atur" />
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/shape_border">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="16dp"
-                    android:src="@drawable/pengingat_pic" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- LinearLayout Horizontal -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Pengingat"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    android:background="@drawable/shape_border">
 
-                <Button
-                    android:id="@+id/btnPengingat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="85dp"
-                    android:text="Atur" />
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/pengingat_pic" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Pengingat"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnPengingat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="85dp"
+                        android:text="Atur" />
+                </LinearLayout>
+
+                <!-- Button Container untuk Tombol Horizontal -->
                 <LinearLayout
                     android:id="@+id/button_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="16dp" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
