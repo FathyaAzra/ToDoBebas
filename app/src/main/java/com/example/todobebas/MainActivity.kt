@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.todobebas.ui.tugas.TugasFragment
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private fun onClick(view: View) {
         when (view.id) {
             R.id.btnmasuk -> {
-                val intent = Intent(this, TodoActivity::class.java)
+                val intent = Intent(this, EditActivity::class.java)
                 startActivity(intent)
             }
         }
