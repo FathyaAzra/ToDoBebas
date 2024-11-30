@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/dialog_background"
+    android:background="@drawable/dialog_repeat_back"
     android:gravity="center_horizontal">
 
         <!-- Title and Toggle -->
@@ -25,9 +25,9 @@
 
         <Switch
             android:id="@+id/switch_repeat"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginLeft="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="60dp"
             android:scaleX="1.5"
             android:scaleY="1.5"/>
     </LinearLayout>
