@@ -7,9 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.todobebas.databinding.ActivityMainBinding
+import com.example.todobebas.databinding.ActivityNavigationBinding
 import com.example.todobebas.databinding.FragmentTugasBinding
 
 class TugasFragment : Fragment() {
+
+//    private val _binding: ActivityNavigationBinding by lazy {
+//        ActivityMainBinding.inflate(layoutInflater)
+//    }
 
     private var _binding: FragmentTugasBinding? = null
 
