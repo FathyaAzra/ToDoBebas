@@ -1,10 +1,10 @@
-package com.example.todobebas.database
+package com.example.todobebas.notif
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.io.Serializable
+import com.example.todobebas.database.Todo
 
 @Entity(
     tableName = "notifications",

@@ -20,15 +20,6 @@ class MainActivity : AppCompatActivity() {
         button = findViewById(R.id.btnmasuk) // Make sure this ID exists in your XML
         button.setOnClickListener { onClick(it) }
 
-//        val periodicWork = PeriodicWorkRequestBuilder<NotificationWorker>(1, TimeUnit.HOURS).build()
-////        WorkManager.getInstance(this).enqueue(periodicWork)
-//
-//        val notificationWork: WorkRequest =
-//            OneTimeWorkRequestBuilder<NotificationWorker>()
-//                .setInitialDelay(5, TimeUnit.SECONDS)
-//                .build()
-//
-//        WorkManager.getInstance(this).enqueue(notificationWork)
     }
     private fun onClick(view: View) {
         when (view.id) {
