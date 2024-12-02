@@ -13,16 +13,15 @@ import com.example.todobebas.databinding.FragmentTugasBinding
 
 class TugasFragment : Fragment() {
 
-//    private val _binding: ActivityNavigationBinding by lazy {
-//        ActivityMainBinding.inflate(layoutInflater)
-//    }
-
     private var _binding: FragmentTugasBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
+//    private val _binding: FragmentTugasBinding by lazy {
+//        FragmentTugasBinding.inflate(layoutInflater)
+//    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
