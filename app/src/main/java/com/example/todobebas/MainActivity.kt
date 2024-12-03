@@ -24,8 +24,11 @@ class MainActivity : AppCompatActivity() {
     private fun onClick(view: View) {
         when (view.id) {
             R.id.btnmasuk -> {
-                val intent = Intent(this, EditActivity::class.java)
-                startActivity(intent)
+                // Gunakan FragmentTransaction untuk memuat fragment
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, TugasFragment()) // Pastikan ID sesuai dengan layout container Anda
+                    .addToBackStack(null) // Tambahkan ke back stack (opsional)
+                    .commit()
             }
         }
     }
