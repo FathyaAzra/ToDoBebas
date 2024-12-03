@@ -15,7 +15,7 @@ import com.github.mikephil.charting.data.PieEntry
 
 class StatistikFragment : Fragment() {
 
-    private var _binding: FragmentStatistikBinding? = null
+    /*private var _binding: FragmentStatistikBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -54,5 +54,5 @@ class StatistikFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
+    }*/
 }

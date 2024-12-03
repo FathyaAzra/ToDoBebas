@@ -7,18 +7,45 @@
     android:orientation="vertical"
     tools:context=".StatistikFragment">
 
-    <!-- PieChart for displaying statistics -->
+    <!-- TextView to display some stats (Optional) -->
+
+    <TextView
+        android:id="@+id/titleStatistikView"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:text="STATISTIK"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="250dp" />
 
-    <!-- TextView to display some stats (Optional) -->
     <TextView
         android:id="@+id/textNotifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stats Here"
+        android:text="Statistik Saya"
         android:padding="16dp"
         android:textSize="18sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskList"
+        android:layout_width="412dp"
+        android:layout_height="277dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calendarView"
+        app:layout_constraintVertical_bias="0.619"
+        tools:listitem="@layout/item_task" />
 </LinearLayout>
