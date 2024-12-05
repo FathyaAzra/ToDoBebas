@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class KalenderViewModel : ViewModel() {
 
-    /*private val _tasks = MutableLiveData<Map<String, List<String>>>()
+    private val _tasks = MutableLiveData<Map<String, List<String>>>()
 
     init {
         // Sample tasks for different dates
@@ -22,5 +22,5 @@ class KalenderViewModel : ViewModel() {
         val taskList = MutableLiveData<List<String>>()
         taskList.value = _tasks.value?.get(date) ?: emptyList()
         return taskList
-    } */
+    }
 }

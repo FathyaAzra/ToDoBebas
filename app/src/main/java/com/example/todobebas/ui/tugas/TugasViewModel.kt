@@ -10,4 +10,5 @@ class TugasViewModel : ViewModel() {
         value = "This is tugas Fragment"
     }
     val text: LiveData<String> = _text
+
 }

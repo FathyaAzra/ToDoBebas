@@ -4,13 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tugas.TugasFragment">
-
-    <fragment
-        android:id="@+id/tugasFragment"
-        android:name="com.example.todobebas.ui.tugas.TugasFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    tools:context=".TugasActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +34,4 @@
         app:iconSize="65dp"
         app:iconTint="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
