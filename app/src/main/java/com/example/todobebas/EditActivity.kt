@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.todobebas.ui.tugas.TugasFragment
 import java.util.Calendar
 
 
@@ -46,21 +47,27 @@ class EditActivity : AppCompatActivity() {
         }
 
         //tombol atur pengingat
-        val buttonPengingat : Button = findViewById(R.id.btnPengingat)
+        val buttonPengingat: Button = findViewById(R.id.btnPengingat)
         val buttonContainer: LinearLayout = findViewById(R.id.button_container)
         buttonPengingat.setOnClickListener {
             for (i in 1..3) {
                 val newButton = Button(this)
                 newButton.text = "Tombol $i"
-                newButton.layoutParams = LinearLayout.LayoutParams(
+
+                // Menambahkan margin top
+                val params = LinearLayout.LayoutParams(
                     0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1f
                 )
+                val topMarginInDp = 16
+                val scale = resources.displayMetrics.density
+                val topMarginInPx = (topMarginInDp * scale + 0.5f).toInt()
+                params.topMargin = topMarginInPx // Atur margin top
+
+                newButton.layoutParams = params
                 buttonContainer.addView(newButton)
             }
-
-            // Nonaktifkan tombol utama setelah menambahkan tombol
             buttonPengingat.visibility = View.GONE
         }
 
