@@ -35,4 +35,11 @@
         app:iconSize="65dp"
         app:iconTint="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="415dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        app:srcCompat="@drawable/rec_blue1" />-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

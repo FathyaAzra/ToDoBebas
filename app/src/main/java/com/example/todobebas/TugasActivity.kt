@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.todobebas.ui.tugas.AddTask
 
 class TugasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +23,7 @@ class TugasActivity : AppCompatActivity() {
     private fun onClick(view: View) {
         when (view.id) {
             R.id.btnTambah -> {
-                val intent = Intent(this, AddTask::class.java)
+                val intent = Intent(this, AddTaskActivity::class.java)
                 startActivity(intent)
             }
 

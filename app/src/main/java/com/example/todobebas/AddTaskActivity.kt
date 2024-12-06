@@ -1,22 +1,22 @@
-package com.example.todobebas.ui.tugas
+package com.example.todobebas
 
 import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todobebas.R
-import com.example.todobebas.setOnClickListener
-import com.example.todobebas.setText
+//import com.example.todobebas.setOnClickListener
+//import com.example.todobebas.setText
 import java.util.Calendar
 
-class AddTask : AppCompatActivity() {
+class AddTaskActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.add_task_dialog)
+        setContentView(R.layout.activity_add_task)
 
         var edTaskDate = null
-        edTaskDate.setOnClickListener {
-            showDatePicker()
-        }
+//        edTaskDate.setOnClickListener {
+//            showDatePicker()
+//        }
     }
 
     private fun showDatePicker() {
@@ -31,7 +31,7 @@ class AddTask : AppCompatActivity() {
                 val formattedDate =
                     String.format("%02d-%02d-%04d", selectedDay, selectedMonth + 1, selectedYear)
                 var edTaskDate = null
-                edTaskDate.setText(formattedDate)
+//                edTaskDate.setText(formattedDate)
             }, year, month, day)
 
         datePickerDialog.show()

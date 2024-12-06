@@ -16,6 +16,9 @@
         android:theme="@style/Theme.ToDoBebas"
         tools:targetApi="31">
         <activity
+            android:name=".AddTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".TugasActivity"
             android:exported="false" />
         <activity
