@@ -6,12 +6,6 @@
     app:startDestination="@+id/navigation_tugas">
 
     <fragment
-        android:id="@+id/navigation_tugas"
-        android:name="com.example.todobebas.ui.tugas.TugasFragment"
-        android:label="@string/title_tugas"
-        tools:layout="@layout/fragment_tugas" />
-
-    <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.todobebas.ui.kalender.KalenderFragment"
         android:label="@string/title_kalender"

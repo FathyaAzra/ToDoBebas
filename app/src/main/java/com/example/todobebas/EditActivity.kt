@@ -17,8 +17,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.todobebas.ui.tugas.TugasFragment
-import com.example.todobebas.ui.tugas.TugasViewModel
 import java.util.Calendar
 
 
@@ -93,7 +91,7 @@ class EditActivity : AppCompatActivity() {
     private fun onClick(view: View) {
         when (view.id) {
             R.id.backArrow -> {
-                val intent = Intent(this, TugasViewModel::class.java)
+                val intent = Intent(this, TugasActivity::class.java)
                 startActivity(intent)
             }
 
