@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TugasActivity">
 
+    <!-- LinearLayout untuk RecyclerView -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,22 +26,61 @@
 
     </LinearLayout>
 
+    <!-- FAB tetap di atas konten -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btnTambah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="15dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="95dp"
         android:backgroundTint="@color/darkblue"
         app:icon="@drawable/add_24px"
         app:iconSize="65dp"
         app:iconTint="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView"-->
-<!--        android:layout_width="415dp"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        app:srcCompat="@drawable/rec_blue1" />-->
+    <!-- Navigasi -->
+    <LinearLayout
+        android:id="@+id/navigationLayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@drawable/navigasi">
+
+        <!-- Bagian pertama -->
+        <ImageButton
+            android:id="@+id/navTugas"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/group"
+            android:contentDescription="Tugas"
+            android:scaleType="center" />
+
+        <!-- Bagian kedua -->
+        <ImageButton
+            android:id="@+id/navKalender"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/vector"
+            android:contentDescription="Kalender"
+            android:scaleType="center" />
+
+        <!-- Bagian ketiga -->
+        <ImageButton
+            android:id="@+id/navStatistik"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/teenyicons_donut_chart_solid"
+            android:contentDescription="Statistik"
+            android:scaleType="center" />
+    </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

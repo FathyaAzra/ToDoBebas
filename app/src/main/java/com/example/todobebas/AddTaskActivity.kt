@@ -1,32 +1,38 @@
 package com.example.todobebas
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.todobebas.R
-//import com.example.todobebas.setOnClickListener
-//import com.example.todobebas.setText
-import java.util.Calendar
+import com.example.todobebas.databinding.ActivityAddTaskBinding
+import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
     private lateinit var button: Button
 
-    @SuppressLint("MissingInflatedId")
+    private lateinit var binding: ActivityAddTaskBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_task)
+        binding = ActivityAddTaskBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         button = findViewById(R.id.btnSaveTask) // Make sure this ID exists in your XML
         button.setOnClickListener { onClick(it) }
 
-//        var edTaskDate = null
-////        edTaskDate.setOnClickListener {
-////            showDatePicker()
-////        }
+        // Menambahkan listener pada ImageView untuk berpindah ke TugasActivity
+        binding.closeImg.setOnClickListener {
+            val intent = Intent(this, TugasActivity::class.java)
+            startActivity(intent)
+            finish() // Opsional: Menutup AddTaskActivity agar tidak kembali ke sini
+        }
+
+        // Set OnClickListener pada edTaskDate
+        binding.edTaskDate.setOnClickListener {
+            showDatePicker()
+        }
     }
 
     private fun onClick(view: View) {
@@ -35,24 +41,35 @@ class AddTaskActivity : AppCompatActivity() {
                 val intent = Intent(this, TugasActivity::class.java)
                 startActivity(intent)
             }
+
         }
     }
 
     private fun showDatePicker() {
+        // Dapatkan tanggal sekarang
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog =
-            DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-                // Format tanggal dan tampilkan di TextInputEditText
-                val formattedDate =
-                    String.format("%02d-%02d-%04d", selectedDay, selectedMonth + 1, selectedYear)
-                var edTaskDate = null
-//                edTaskDate.setText(formattedDate)
-            }, year, month, day)
-
+        // Tampilkan DatePickerDialog
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                // Format tanggal (misalnya: 2024-12-01)
+                val selectedDate = String.format(
+                    "%04d-%02d-%02d",
+                    selectedYear,
+                    selectedMonth + 1,
+                    selectedDay
+                )
+                // Set teks pada edTaskDate
+                binding.edTaskDate.setText(selectedDate)
+            },
+            year,
+            month,
+            day
+        )
         datePickerDialog.show()
     }
 }

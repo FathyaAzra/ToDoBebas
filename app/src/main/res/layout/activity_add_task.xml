@@ -75,7 +75,7 @@
                     android:layout_height="?actionBarSize"
                     android:background="#EAE4E8"
                     android:gravity="top|start"
-                    android:inputType="date"
+                    android:inputType="none"
                     android:focusable="false"
                     android:clickable="true" />
             </com.google.android.material.textfield.TextInputLayout>
