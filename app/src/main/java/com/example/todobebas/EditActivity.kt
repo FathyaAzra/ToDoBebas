@@ -94,7 +94,6 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-
     private fun onClick(view: View) {
         when (view.id) {
             R.id.backArrow -> {

@@ -42,48 +42,39 @@
 
         <Button
             android:id="@+id/btn_hour"
-            android:layout_width="wrap_content"
+            android:layout_width="76dp"
             android:layout_height="wrap_content"
             android:text="Jam"
-            android:background="@drawable/option_button_background"
-            android:layout_margin="4dp"
-            android:padding="8dp" />
+            android:background="@drawable/option_button_background" />
 
         <Button
             android:id="@+id/btn_day"
-            android:layout_width="wrap_content"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:text="Hari"
-            android:background="@drawable/option_button_background"
-            android:layout_margin="4dp"
-            android:padding="8dp" />
+            android:background="@drawable/option_button_background" />
 
         <Button
             android:id="@+id/btn_week"
-            android:layout_width="wrap_content"
+            android:layout_width="97dp"
             android:layout_height="wrap_content"
             android:text="Minggu"
-            android:background="@drawable/option_button_background"
-            android:layout_margin="4dp"
-            android:padding="8dp" />
+            android:textAlignment="center"
+            android:background="@drawable/option_button_background" />
 
         <Button
             android:id="@+id/btn_month"
-            android:layout_width="wrap_content"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:text="Bulan"
-            android:background="@drawable/option_button_background"
-            android:layout_margin="4dp"
-            android:padding="8dp" />
+            android:background="@drawable/option_button_background" />
 
         <Button
             android:id="@+id/btn_year"
-            android:layout_width="wrap_content"
+            android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:text="Tahun"
-            android:background="@drawable/option_button_background"
-            android:layout_margin="4dp"
-            android:padding="8dp" />
+            android:background="@drawable/option_button_background" />
     </LinearLayout>
 
         <!-- Action Buttons -->

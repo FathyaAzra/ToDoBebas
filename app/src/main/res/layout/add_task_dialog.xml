@@ -87,7 +87,7 @@
                 android:layout_gravity="end"
                 android:backgroundTint="@color/darkblue"
                 android:layout_marginTop="3dp"
-                android:text="SImpan"
+                android:text="Simpan"
                 android:textSize="17sp"/>
         </LinearLayout>
 
