@@ -1,7 +1,11 @@
 package com.example.todobebas
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todobebas.R
 //import com.example.todobebas.setOnClickListener
@@ -9,14 +13,29 @@ import com.example.todobebas.R
 import java.util.Calendar
 
 class AddTaskActivity : AppCompatActivity() {
+    private lateinit var button: Button
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_task)
 
-        var edTaskDate = null
-//        edTaskDate.setOnClickListener {
-//            showDatePicker()
-//        }
+        button = findViewById(R.id.btnSaveTask) // Make sure this ID exists in your XML
+        button.setOnClickListener { onClick(it) }
+
+//        var edTaskDate = null
+////        edTaskDate.setOnClickListener {
+////            showDatePicker()
+////        }
+    }
+
+    private fun onClick(view: View) {
+        when (view.id) {
+            R.id.btnSaveTask -> {
+                val intent = Intent(this, TugasActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun showDatePicker() {

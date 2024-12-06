@@ -14,7 +14,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/taskRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="670dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="100dp"
