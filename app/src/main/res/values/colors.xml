@@ -6,4 +6,5 @@
     <color name="magenta">#C983FF</color>
     <color name="red">#F44336</color>
     <color name="black">#040404</color>
+    <color name="grey">#686565</color>
 </resources>
