@@ -6,20 +6,14 @@
     app:startDestination="@+id/navigation_tugas">
 
     <fragment
-        android:id="@+id/navigation_tugas"
-        android:name="com.example.todobebas.ui.tugas.TugasFragment"
-        android:label="@string/title_tugas"
-        tools:layout="@layout/fragment_tugas" />
-
-    <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.todobebas.ui.kalender.KalenderFragment"
+        android:name="com.example.todobebas.KalenderActivity"
         android:label="@string/title_kalender"
         tools:layout="@layout/fragment_kalender" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.todobebas.ui.notifications.StatistikFragment"
+        android:name="com.example.todobebas.StatistikActivity"
         android:label="@string/title_statistik"
         tools:layout="@layout/fragment_statistik" />
 </navigation>

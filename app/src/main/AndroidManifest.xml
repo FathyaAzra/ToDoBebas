@@ -16,8 +16,20 @@
         android:theme="@style/Theme.ToDoBebas"
         tools:targetApi="31">
         <activity
+            android:name=".AddTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".TugasActivity"
             android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".EditActivity"
             android:exported="false" />
@@ -31,15 +43,6 @@
             android:label="@string/title_activity_todo"
             android:theme="@style/Theme.ToDoBebas" />
         <activity android:name=".StatisticsActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <receiver
             android:name=".notif.NotificationReceiver"

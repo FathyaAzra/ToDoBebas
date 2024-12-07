@@ -9,7 +9,7 @@
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/white"
     app:cardElevation="10dp"
-    tools:context=".ui.tugas.AddTask">
+    tools:context=".AddTaskActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,12 +54,12 @@
                 android:layout_marginTop="15dp"
                 android:hint="Masukan judul tugas">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edTaskTitle"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:background="#EAE4E8"
-                android:inputType="text"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edTaskTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:background="#EAE4E8"
+                    android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -75,19 +75,19 @@
                     android:layout_height="?actionBarSize"
                     android:background="#EAE4E8"
                     android:gravity="top|start"
-                    android:inputType="date"
+                    android:inputType="none"
                     android:focusable="false"
                     android:clickable="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/saveTaskBtn"
+                android:id="@+id/btnSaveTask"
                 android:layout_width="wrap_content"
                 android:layout_height="?actionBarSize"
                 android:layout_gravity="end"
                 android:backgroundTint="@color/darkblue"
                 android:layout_marginTop="3dp"
-                android:text="Simpan"
+                android:text="SImpan"
                 android:textSize="17sp"/>
         </LinearLayout>
 
