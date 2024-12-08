@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <stroke android:width="1dp" android:color="@color/darkblue" />
-    <corners android:radius="5dp" />
-
+<!-- res/drawable/rounded_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#F5F5F5" />
+    <corners android:radius="16dp" /> <!-- Radius untuk sudut lengkung -->
+    <stroke
+        android:width="1dp"
+        android:color="#CCCCCC" />
 </shape>
