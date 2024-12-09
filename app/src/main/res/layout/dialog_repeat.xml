@@ -39,32 +39,28 @@
             android:id="@+id/btn_day"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="Hari"
-            android:backgroundTint="@color/grey"/>
+            android:layout_marginEnd="4dp"
+            android:text="Hari" />
 
         <Button
             android:id="@+id/btn_week"
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="Minggu"
-            android:backgroundTint="@color/grey" />
+            android:layout_marginEnd="4dp"
+            android:text="Minggu" />
 
         <Button
             android:id="@+id/btn_month"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="Bulan"
-            android:backgroundTint="@color/grey" />
+            android:layout_marginEnd="4dp"
+            android:text="Bulan" />
 
         <Button
             android:id="@+id/btn_year"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
-            android:text="Tahun"
-            android:backgroundTint="@color/grey" />
+            android:text="Tahun" />
     </LinearLayout>
 
 

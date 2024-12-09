@@ -14,19 +14,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.todobebas.databinding.ActivityAddTaskBinding
-import java.util.Calendar
 
 
 class EditActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddTaskBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityAddTaskBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.edit_activity)
 
         //menulis nama tugas
         val namaTask : EditText = findViewById(R.id.namaTask)
@@ -37,16 +31,11 @@ class EditActivity : AppCompatActivity() {
 
         //tombol atur waktu
         val buttonSetTime: Button = findViewById(R.id.btnSetTime)
-        val tvSelectedTime: TextView = findViewById(R.id.tv_selected_time)
         buttonSetTime.setOnClickListener {
             val timePickerDialog = TimePickerDialogFragment { hour, minute ->
-                tvSelectedTime.text = String.format("%02d:%02d", hour, minute)
+                // Logika untuk menangani waktu yang dipilih
             }
             timePickerDialog.show(supportFragmentManager, "TimePickerDialog")
-        }
-
-        binding.edTaskDate.setOnClickListener {
-            showDatePicker()
         }
 
         //tombol atur pengingat
@@ -120,34 +109,6 @@ class EditActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    private fun showDatePicker() {
-        // Dapatkan tanggal sekarang
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        // Tampilkan DatePickerDialog
-        val datePickerDialog = DatePickerDialog(
-            this,
-            { _, selectedYear, selectedMonth, selectedDay ->
-                // Format tanggal (misalnya: 2024-12-01)
-                val selectedDate = String.format(
-                    "%04d-%02d-%02d",
-                    selectedYear,
-                    selectedMonth + 1,
-                    selectedDay
-                )
-                // Set teks pada edTaskDate
-                binding.edTaskDate.setText(selectedDate)
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
     }
 
 

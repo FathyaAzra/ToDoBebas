@@ -38,7 +38,7 @@ class TugasActivity : AppCompatActivity() {
     private fun onClick(view: View) {
         when (view.id) {
             R.id.btnTambah -> {
-                val intent = Intent(this, AddTaskActivity::class.java)
+                val intent = Intent(this, EditActivity::class.java)
                 startActivity(intent)
             }
 

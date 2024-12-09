@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun onClick(view: View) {
         when (view.id) {
             R.id.btnmasuk -> {
-                val intent = Intent(this, EditActivity::class.java)
+                val intent = Intent(this, TugasActivity::class.java)
                 startActivity(intent)
             }
 

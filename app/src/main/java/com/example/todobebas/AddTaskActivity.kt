@@ -13,7 +13,6 @@ class AddTaskActivity : AppCompatActivity() {
     private lateinit var button: Button
 
     private lateinit var binding: ActivityAddTaskBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
