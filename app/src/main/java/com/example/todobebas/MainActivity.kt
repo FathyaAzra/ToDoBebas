@@ -16,18 +16,16 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        button = findViewById(R.id.btnmasuk) // Make sure this ID exists in your XML
+        button = findViewById(R.id.btnmasuk) // Pastikan ID sesuai dengan di XML
         button.setOnClickListener { onClick(it) }
-
     }
 
     private fun onClick(view: View) {
         when (view.id) {
             R.id.btnmasuk -> {
-                val intent = Intent(this, TugasActivity::class.java)
+                val intent = Intent(this, AddTaskActivity::class.java)
                 startActivity(intent)
             }
-
         }
     }
 }

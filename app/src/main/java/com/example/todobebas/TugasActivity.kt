@@ -6,7 +6,11 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.todobebas.database.AppDatabase
 import com.example.todobebas.databinding.ActivityTugasBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class TugasActivity : AppCompatActivity() {
     private lateinit var button: Button
@@ -16,6 +20,19 @@ class TugasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_tugas)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val database = AppDatabase.getDatabase(applicationContext)
+            val todos = database.todoDao().getAll()
+
+            // Kirim data ke UI thread
+            runOnUiThread {
+                for (todoItem in todos) {
+                    println("Todo: ${todoItem.todo_name}, Date: ${todoItem.todo_date}")
+                }
+            }
+        }
+
         binding = ActivityTugasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

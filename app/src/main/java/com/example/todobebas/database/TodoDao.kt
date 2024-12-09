@@ -8,6 +8,7 @@ import androidx.room.Update
 
 @Dao
 interface TodoDao {
+
     @Query("SELECT * FROM todos")
     fun getAll():List<Todo>
 
