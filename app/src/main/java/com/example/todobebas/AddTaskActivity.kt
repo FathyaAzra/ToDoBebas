@@ -3,8 +3,6 @@ package com.example.todobebas
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todobebas.database.AppDatabase
 import com.example.todobebas.database.Todo
@@ -12,6 +10,7 @@ import com.example.todobebas.databinding.ActivityAddTaskBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
@@ -22,16 +21,17 @@ class AddTaskActivity : AppCompatActivity() {
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Listener untuk tombol Simpan
         binding.btnSaveTask.setOnClickListener {
             saveTaskToDatabase()
         }
 
+        // Listener untuk tombol tutup
         binding.closeImg.setOnClickListener {
-            val intent = Intent(this, TugasActivity::class.java)
-            startActivity(intent)
-            finish()
+            navigateToTaskActivity()
         }
 
+        // Listener untuk memilih tanggal
         binding.edTaskDate.setOnClickListener {
             showDatePicker()
         }
@@ -43,7 +43,8 @@ class AddTaskActivity : AppCompatActivity() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(
+        // Dialog pemilih tanggal
+        DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
                 val selectedDate = String.format(
@@ -57,15 +58,13 @@ class AddTaskActivity : AppCompatActivity() {
             year,
             month,
             day
-        )
-        datePickerDialog.show()
+        ).show()
     }
 
     private fun convertDateToTimestamp(date: String): Long {
-        val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return try {
-            val parsedDate = dateFormat.parse(date)
-            parsedDate?.time ?: 0L
+            dateFormat.parse(date)?.time ?: 0L
         } catch (e: Exception) {
             e.printStackTrace()
             0L
@@ -73,44 +72,58 @@ class AddTaskActivity : AppCompatActivity() {
     }
 
     private fun saveTaskToDatabase() {
-        val title = binding.edTaskTitle.text.toString()
-        val date = binding.edTaskDate.text.toString()
+        val title = binding.edTaskTitle.text.toString().trim()
+        val date = binding.edTaskDate.text.toString().trim()
 
         // Validasi input
         if (title.isEmpty()) {
             binding.edTaskTitleL.error = "Judul tugas tidak boleh kosong"
             return
+        } else {
+            binding.edTaskTitleL.error = null
         }
 
         if (date.isEmpty()) {
             binding.edTaskDateL.error = "Tanggal tidak boleh kosong"
             return
+        } else {
+            binding.edTaskDateL.error = null
         }
 
         // Konversi tanggal ke timestamp
         val dateTimestamp = convertDateToTimestamp(date)
+        if (dateTimestamp == 0L) {
+            binding.edTaskDateL.error = "Format tanggal tidak valid"
+            return
+        }
 
         // Buat objek Todo
         val todo = Todo(
-            todo_id = 0,
+            todo_id = 0, // Auto-increment
             todo_name = title,
-            todo_desc = "Default Description", // Sesuaikan jika ada deskripsi dari user
-            todo_date = dateTimestamp
+            todo_desc = title,
+            todo_date = dateTimestamp,
         )
 
-        // Simpan ke database
+        // Simpan ke database di thread IO
         CoroutineScope(Dispatchers.IO).launch {
             val database = AppDatabase.getDatabase(applicationContext)
             database.todoDao().insertAll(todo)
 
-            // Mendapatkan semua data dari database untuk verifikasi
+            // Debug: Cetak data tugas yang disimpan
             val todos = database.todoDao().getAll()
             for (todoItem in todos) {
                 println("Todo: ${todoItem.todo_name}, Date: ${todoItem.todo_date}")
             }
-        }
 
-        // Pindah ke TugasActivity setelah menyimpan
+            // Pindah ke TugasActivity setelah menyimpan
+            runOnUiThread {
+                navigateToTaskActivity()
+            }
+        }
+    }
+
+    private fun navigateToTaskActivity() {
         val intent = Intent(this, TugasActivity::class.java)
         startActivity(intent)
         finish()

@@ -64,9 +64,26 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="Widget.Design.TextInputLayout"
+                android:id="@+id/addTaskDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Masukan deskripsi tugas">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edTaskDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:background="#EAE4E8"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="Widget.Design.TextInputLayout"
                 android:id="@+id/edTaskDateL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:hint="Masukan tanggal">
 
                 <com.google.android.material.textfield.TextInputEditText

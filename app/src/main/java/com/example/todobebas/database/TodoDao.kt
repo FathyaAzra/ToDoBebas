@@ -10,7 +10,7 @@ import androidx.room.Update
 interface TodoDao {
 
     @Query("SELECT * FROM todos")
-    fun getAll():List<Todo>
+    fun getAll(): List<Todo>
 
     @Insert
     fun insertAll(vararg todo: Todo)
