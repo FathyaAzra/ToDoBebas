@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 
-class EditActivity : AppCompatActivity() {
+class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +109,11 @@ class EditActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onRepeatChanged(status: Boolean) {
+        val repeatButton: Button = findViewById(R.id.btnMengulang)
+        repeatButton.text = if (status) "Ya" else "Tidak"
     }
 
 
