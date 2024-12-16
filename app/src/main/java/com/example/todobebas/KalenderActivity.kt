@@ -34,9 +34,19 @@ class KalenderActivity : AppCompatActivity() {
 
 
         // Initialize the adapter with the click handler for updating task status
-        taskListAdapter = TodoAdapter { updatedTodo ->
-            updateTodoInDatabase(updatedTodo)
-        }
+        taskListAdapter = TodoAdapter(
+            onItemClick = { updatedTodo ->
+                updateTodoInDatabase(updatedTodo) // Handle click to toggle status
+            },
+            onItemLongClick = { todo ->
+                val intent = Intent(this, EditActivity::class.java)
+                intent.putExtra("todoId", todo.todo_id) // Pass the ID of the clicked task
+                intent.putExtra("todoName", todo.todo_name) // Optional: Pass more details
+                intent.putExtra("todoDate", todo.todo_date)
+                this.startActivity(intent)
+            }
+        )
+
         binding.taskRV.adapter = taskListAdapter
 
         // Set up the CalendarView listener to update tasks based on selected date

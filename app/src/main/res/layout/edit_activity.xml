@@ -44,7 +44,6 @@
 
     </LinearLayout>
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -60,10 +59,22 @@
             <EditText
                 android:id="@+id/namaTask"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="100dp"
                 android:hint="Masukkan Teks"
-                android:textSize="25dp"
-                android:gravity="top"
+                android:textSize="30dp"
+                android:gravity="bottom"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:overScrollMode="always" />
+
+            <!-- New EditText for task description -->
+            <EditText
+                android:id="@+id/descTask"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:hint="Masukkan Deskripsi"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
                 android:inputType="textMultiLine"
                 android:scrollbars="vertical"
                 android:overScrollMode="always" />
@@ -98,7 +109,6 @@
                     android:text="Atur"
                     android:backgroundTint="@color/grey"/>
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,7 +153,6 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal" />
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"

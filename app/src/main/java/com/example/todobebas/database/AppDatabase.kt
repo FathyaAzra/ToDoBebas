@@ -4,17 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.todobebas.notif.Notification
-import com.example.todobebas.notif.NotificationDao
 
-@Database(
-    entities = [Todo::class, Notification::class],
-    version = 1,
-    exportSchema = true
-)
+@Database(entities = [Todo::class, Catatan::class], version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
-    abstract fun notificationDao(): NotificationDao
+    abstract fun catatanDao(): CatatanDao
 
     companion object {
         @Volatile

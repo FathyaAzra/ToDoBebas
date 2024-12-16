@@ -11,7 +11,10 @@ import com.example.todobebas.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TodoAdapter(private val onItemClick: (Todo) -> Unit) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+class TodoAdapter(
+    private val onItemClick: (Todo) -> Unit,
+    private val onItemLongClick: (Todo) -> Unit // New lambda for long-press action
+) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
     private val todos = mutableListOf<Todo>()
 
@@ -27,10 +30,10 @@ class TodoAdapter(private val onItemClick: (Todo) -> Unit) : RecyclerView.Adapte
         private val titleText: TextView = itemView.findViewById(R.id.titleText)
         private val dateText: TextView = itemView.findViewById(R.id.dateText)
         private val icon: ImageView = itemView.findViewById(R.id.icon)
-        private val cardView: MaterialCardView = itemView.findViewById(R.id.cardView) // Corrected to MaterialCardView
+        private val cardView: MaterialCardView = itemView.findViewById(R.id.cardView)
 
         // Bind data to the view
-        fun bind(todo: Todo, onItemClick: (Todo) -> Unit) {
+        fun bind(todo: Todo, onItemClick: (Todo) -> Unit, onItemLongClick: (Todo) -> Unit) {
             titleText.text = todo.todo_name
             dateText.text = formatDate(todo.todo_date)
 
@@ -44,10 +47,16 @@ class TodoAdapter(private val onItemClick: (Todo) -> Unit) : RecyclerView.Adapte
                 "done" -> cardView.setCardBackgroundColor(itemView.context.getColor(R.color.lightblue))
             }
 
-            // Handle the click to toggle the task's status
+            // Handle click to toggle the task's status
             itemView.setOnClickListener {
                 val updatedTodo = toggleStatus(todo)
                 onItemClick(updatedTodo)  // Notify the activity/fragment to update the database
+            }
+
+            // Handle long click to trigger editing
+            itemView.setOnLongClickListener {
+                onItemLongClick(todo) // Trigger the lambda for long press
+                true // Return true to indicate the event is handled
             }
         }
 
@@ -78,7 +87,7 @@ class TodoAdapter(private val onItemClick: (Todo) -> Unit) : RecyclerView.Adapte
 
     // Bind data to the ViewHolder
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        holder.bind(todos[position], onItemClick)  // Pass onItemClick here
+        holder.bind(todos[position], onItemClick, onItemLongClick) // Pass the long-click lambda here
     }
 
     // Get the number of items in the list

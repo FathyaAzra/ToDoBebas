@@ -30,9 +30,19 @@ class TugasActivity : AppCompatActivity() {
         binding.taskRV.layoutManager = LinearLayoutManager(this)
 
         // Initialize the adapter with the onItemClick callback
-        adapter = TodoAdapter { updatedTodo ->
-            updateTodoInDatabase(updatedTodo)  // This will be invoked when a task is clicked
-        }
+        adapter = TodoAdapter(
+            onItemClick = { updatedTodo ->
+                updateTodoInDatabase(updatedTodo) // Handle click to toggle status
+            },
+            onItemLongClick = { todo ->
+                val intent = Intent(this, EditActivity::class.java)
+                intent.putExtra("todoId", todo.todo_id) // Pass the ID of the clicked task
+                intent.putExtra("todoName", todo.todo_name) // Optional: Pass more details
+                intent.putExtra("todoDate", todo.todo_date)
+                this.startActivity(intent)
+            }
+        )
+
 
         binding.taskRV.adapter = adapter
 
