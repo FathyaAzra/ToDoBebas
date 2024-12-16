@@ -7,8 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".TugasActivity">
 
+    <!-- Area Header -->
+    <View
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:background="@drawable/header"/>
+
     <!-- LinearLayout untuk RecyclerView -->
     <LinearLayout
+        android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

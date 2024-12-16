@@ -92,4 +92,9 @@ class TodoAdapter(
 
     // Get the number of items in the list
     override fun getItemCount(): Int = todos.size
+
+    fun getTodoAt(position: Int): Todo {
+        return todos[position] // `todos` adalah list yang digunakan di adapter
+    }
+
 }

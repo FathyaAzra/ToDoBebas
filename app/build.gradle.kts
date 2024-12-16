@@ -86,7 +86,6 @@ dependencies {
     implementation ("androidx.room:room-runtime:2.5.2")
     kapt ("androidx.room:room-compiler:2.5.2")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
-
+//    implementation ("it.xabaras.android:recyclerview-swipedecorator:1.3")
 
 }
