@@ -12,6 +12,9 @@ interface TodoDao {
     @Query("SELECT * FROM todos")
     fun getAll(): List<Todo>
 
+    @Query("SELECT * FROM todos WHERE todo_date >= :startOfDay AND todo_date <= :endOfDay")
+    fun getTasksForDate(startOfDay: Long, endOfDay: Long): List<Todo>
+
     @Insert
     fun insertAll(vararg todo: Todo)
 

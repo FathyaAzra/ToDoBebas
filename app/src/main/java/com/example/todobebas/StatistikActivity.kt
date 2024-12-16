@@ -1,46 +1,66 @@
 package com.example.todobebas
 
-class StatistikActivity {
+import android.content.Intent
+import android.os.Bundle
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.example.todobebas.databinding.ActivityStatistikBinding
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 
-        /*private var _binding: FragmentStatistikBinding? = null
-        private val binding get() = _binding!!
+class StatistikActivity : AppCompatActivity() {
 
-        override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            val statistikViewModel =
-                ViewModelProvider(this).get(StatistikViewModel::class.java)
+    private lateinit var binding: ActivityStatistikBinding
 
-            _binding = FragmentStatistikBinding.inflate(inflater, container, false)
-            val root: View = binding.root
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-            val textView: TextView = binding.textNotifications
-            statistikViewModel.text.observe(viewLifecycleOwner) {
-                textView.text = it
-            }
+        // Initialize ViewBinding
+        binding = ActivityStatistikBinding.inflate(layoutInflater)
+        setContentView(binding.root)  // Set the root view of the activity using ViewBinding
 
-            // Initialize the PieChart
-            val pieChart: PieChart = binding.chart
-            setupPieChart(pieChart)
+        // Set up the PieChart
+        val pieChart: PieChart = binding.chart
+        setupPieChart(pieChart)
 
-            return root
-        }
+        // Set the title and description text
+        val textView: TextView = binding.textNotifications
+        textView.text = "Statistik Saya" // You can modify the text as needed
 
-        private fun setupPieChart(pieChart: PieChart) {
-            val entries = ArrayList<PieEntry>()
-            entries.add(PieEntry(40f, "Category 1"))
-            entries.add(PieEntry(60f, "Category 2"))
-
-            val dataSet = PieDataSet(entries, "Statistics")
-            val pieData = PieData(dataSet)
-            pieChart.data = pieData
-            pieChart.invalidate() // Refresh the chart
-        }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }*/
-
+        // Handle navigation buttons (Tugas, Kalender, Statistik)
+        setupNavigation()
     }
+
+    // Set up the PieChart with data
+    private fun setupPieChart(pieChart: PieChart) {
+        val entries = ArrayList<PieEntry>()
+        entries.add(PieEntry(40f, "Category 1"))
+        entries.add(PieEntry(60f, "Category 2"))
+
+        val dataSet = PieDataSet(entries, "Statistics")
+        val pieData = PieData(dataSet)
+        pieChart.data = pieData
+        pieChart.invalidate() // Refresh the chart
+    }
+
+    // Set up navigation button listeners
+    private fun setupNavigation() {
+        binding.navTugas.setOnClickListener {
+            // Navigate to TugasActivity
+            val intent = Intent(this, TugasActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.navKalender.setOnClickListener {
+            // Navigate to KalenderActivity
+            val intent = Intent(this, KalenderActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.navStatistik.setOnClickListener {
+            // Already in StatistikActivity, no need to do anything
+        }
+    }
+}

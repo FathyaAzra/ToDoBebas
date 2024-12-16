@@ -11,9 +11,6 @@ interface NotificationDao {
     @Query("SELECT * FROM notifications")
     fun getAll():List<Notification>
 
-    @Query("SELECT * FROM notifications WHERE todo_id = :todoId")
-    fun getNotificationsForTodo(todoId: Int): List<Notification>
-
 
     @Insert
     fun insertAll(vararg transaction: Notification)

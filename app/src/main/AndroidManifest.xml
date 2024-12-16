@@ -42,6 +42,9 @@
             android:exported="false"
             android:label="@string/title_activity_navigation" />
         <activity android:name=".StatistikActivity" />
+        <activity
+            android:name=".KalenderActivity">
+        </activity>
 
         <receiver
             android:name=".notif.NotificationReceiver"
