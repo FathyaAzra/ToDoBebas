@@ -103,6 +103,7 @@ class AddTaskActivity : AppCompatActivity() {
             todo_name = title,
             todo_desc = title,
             todo_date = dateTimestamp,
+            todo_status = "not yet",
         )
 
         // Simpan ke database di thread IO

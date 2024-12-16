@@ -12,5 +12,6 @@ data class Todo(
     val todo_name: String,
     val todo_desc: String,
     val todo_date: Long,
+    val todo_status: String,
 ) : Serializable {
 }
