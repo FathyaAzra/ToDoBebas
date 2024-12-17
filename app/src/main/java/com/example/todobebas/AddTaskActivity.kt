@@ -73,6 +73,7 @@ class AddTaskActivity : AppCompatActivity() {
 
     private fun saveTaskToDatabase() {
         val title = binding.edTaskTitle.text.toString().trim()
+        val description = binding.edTaskDesc.text.toString().trim()
         val date = binding.edTaskDate.text.toString().trim()
 
         // Validasi input
@@ -83,6 +84,13 @@ class AddTaskActivity : AppCompatActivity() {
             binding.edTaskTitleL.error = null
         }
 
+        if (description.isEmpty()) {
+            binding.edTaskDesc.error = "Deskripsi tugas tidak boleh kosong"
+            return
+        } else {
+            binding.edTaskDesc.error = null
+        }
+
         if (date.isEmpty()) {
             binding.edTaskDateL.error = "Tanggal tidak boleh kosong"
             return
@@ -90,39 +98,31 @@ class AddTaskActivity : AppCompatActivity() {
             binding.edTaskDateL.error = null
         }
 
-        // Konversi tanggal ke timestamp
         val dateTimestamp = convertDateToTimestamp(date)
         if (dateTimestamp == 0L) {
             binding.edTaskDateL.error = "Format tanggal tidak valid"
             return
         }
 
-        // Buat objek Todo
+        // Create and save Todo
         val todo = Todo(
-            todo_id = 0, // Auto-increment
+            todo_id = 0,
             todo_name = title,
-            todo_desc = title,
+            todo_desc = description,
             todo_date = dateTimestamp,
-            todo_status = "not yet",
+            todo_status = "not yet"
         )
 
-        // Simpan ke database di thread IO
         CoroutineScope(Dispatchers.IO).launch {
             val database = AppDatabase.getDatabase(applicationContext)
             database.todoDao().insertAll(todo)
 
-            // Debug: Cetak data tugas yang disimpan
-            val todos = database.todoDao().getAll()
-            for (todoItem in todos) {
-                println("Todo: ${todoItem.todo_name}, Date: ${todoItem.todo_date}")
-            }
-
-            // Pindah ke TugasActivity setelah menyimpan
             runOnUiThread {
                 navigateToTaskActivity()
             }
         }
     }
+
 
     private fun navigateToTaskActivity() {
         val intent = Intent(this, TugasActivity::class.java)

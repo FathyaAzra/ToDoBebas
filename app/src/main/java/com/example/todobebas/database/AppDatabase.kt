@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(entities = [Todo::class, Catatan::class], version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
@@ -20,7 +21,16 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).build()
+                )
+                    .addCallback(object : RoomDatabase.Callback() {
+                        override fun onOpen(db: SupportSQLiteDatabase) {
+                            super.onOpen(db)
+                            // Enable foreign key support
+                            db.execSQL("PRAGMA foreign_keys=ON;")
+                        }
+                    })
+                    .build()
+
                 INSTANCE = instance
                 instance
             }

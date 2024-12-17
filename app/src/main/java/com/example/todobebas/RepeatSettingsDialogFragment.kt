@@ -13,10 +13,11 @@ import androidx.fragment.app.DialogFragment
 class RepeatSettingsDialogFragment : DialogFragment() {
 
     interface OnRepeatChangeListener {
-        fun onRepeatChanged(status: Boolean)
+        fun onRepeatChanged(status: Boolean, repeatInterval: String?)
     }
 
     private var listener: OnRepeatChangeListener? = null
+    private var repeatInterval: String? = null  // To hold the selected repeat interval
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,20 +41,28 @@ class RepeatSettingsDialogFragment : DialogFragment() {
 
         updateButtonState(switchRepeat.isChecked, buttons, colorOn, colorOff)
 
+        // Set listeners for repeat interval buttons
+        buttons.forEach { button ->
+            button.setOnClickListener {
+                repeatInterval = when (button.id) {
+                    R.id.btn_day -> "daily"
+                    R.id.btn_week -> "weekly"
+                    R.id.btn_month -> "monthly"
+                    R.id.btn_year -> "yearly"
+                    else -> null
+                }
+                highlightSelectedButton(button, buttons, colorOn, colorOff)
+            }
+        }
+
         switchRepeat.setOnCheckedChangeListener { _, isChecked ->
             updateButtonState(isChecked, buttons, colorOn, colorOff)
 
-            listener?.onRepeatChanged(isChecked)
+            listener?.onRepeatChanged(isChecked, repeatInterval)
         }
 
         btnCancel.setOnClickListener { dismiss() }
         btnDone.setOnClickListener { dismiss() }
-
-        buttons.forEach { button ->
-            button.setOnClickListener {
-                highlightSelectedButton(button, buttons, colorOn, colorOff)
-            }
-        }
 
         return view
     }
@@ -102,5 +111,5 @@ class RepeatSettingsDialogFragment : DialogFragment() {
         super.onDetach()
         listener = null
     }
-
 }
+

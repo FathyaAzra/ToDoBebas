@@ -13,7 +13,7 @@ interface CatatanDao {
     fun getAll(): List<Catatan>  // Fixed query to select all records
 
     @Insert
-    fun insertAll(vararg catatan: Catatan)  // Use Catatan instead of Todo
+    fun insert(catatan: Catatan)
 
     @Delete
     fun delete(catatan: Catatan)  // Use Catatan instead of Todo

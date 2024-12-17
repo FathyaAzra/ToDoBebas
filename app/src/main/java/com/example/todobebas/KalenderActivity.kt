@@ -22,6 +22,9 @@ class KalenderActivity : AppCompatActivity() {
 
     private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
+    // Keep track of currently selected date to reload tasks when necessary
+    private var selectedDate: String = dateFormatter.format(Date())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,47 +35,30 @@ class KalenderActivity : AppCompatActivity() {
         // Set up RecyclerView for tasks
         binding.taskRV.layoutManager = LinearLayoutManager(this)
 
-
-        // Initialize the adapter with the click handler for updating task status
+        // Initialize the adapter with the click handlers
         taskListAdapter = TodoAdapter(
             onItemClick = { updatedTodo ->
-                updateTodoInDatabase(updatedTodo) // Handle click to toggle status
+                updateTodoInDatabase(updatedTodo)
             },
             onItemLongClick = { todo ->
-                val intent = Intent(this, EditActivity::class.java)
-                intent.putExtra("todoId", todo.todo_id) // Pass the ID of the clicked task
-                intent.putExtra("todoName", todo.todo_name) // Optional: Pass more details
-                intent.putExtra("todoDate", todo.todo_date)
-                this.startActivity(intent)
+                navigateToEditActivity(todo)
             }
         )
-
         binding.taskRV.adapter = taskListAdapter
 
-        // Set up the CalendarView listener to update tasks based on selected date
-        val calendarView = binding.calendarView
-        val tasksTextView = binding.tasksTextView
-
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val selectedDate = formatDate(year, month, dayOfMonth)
-            tasksTextView.text = "Tasks for $selectedDate"
+        // Set up CalendarView listener
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            selectedDate = formatDate(year, month, dayOfMonth)
+            binding.tasksTextView.text = "Tasks for $selectedDate"
             loadTasksForDate(selectedDate)
         }
 
-        // Handle navigation buttons (Tugas, Kalender, Statistik)
-        binding.navTugas.setOnClickListener {
-            val intent = Intent(this, TugasActivity::class.java)
-            startActivity(intent)
-        }
+        // Set default date
+        binding.tasksTextView.text = "Tasks for $selectedDate"
+        loadTasksForDate(selectedDate)
 
-        binding.navKalender.setOnClickListener {
-            // Already in KalenderActivity, no need to do anything
-        }
-
-        binding.navStatistik.setOnClickListener {
-            val intent = Intent(this, StatistikActivity::class.java)
-            startActivity(intent)
-        }
+        // Handle navigation buttons
+        setupNavigation()
     }
 
     private fun formatDate(year: Int, month: Int, dayOfMonth: Int): String {
@@ -81,40 +67,63 @@ class KalenderActivity : AppCompatActivity() {
         return dateFormatter.format(calendar.time)
     }
 
-    private fun loadTasksForDate(selectedDate: String) {
+    private fun loadTasksForDate(date: String) {
         val calendar = Calendar.getInstance()
-        calendar.time = dateFormatter.parse(selectedDate) ?: Date()
+        calendar.time = dateFormatter.parse(date) ?: Date() // Safely parse the date
 
-        // Get the start of the day (00:00:00)
+        // Get start and end of the day
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
         val startOfDay = calendar.timeInMillis
 
-        // Get the end of the day (23:59:59)
         calendar.set(Calendar.HOUR_OF_DAY, 23)
         calendar.set(Calendar.MINUTE, 59)
         calendar.set(Calendar.SECOND, 59)
         val endOfDay = calendar.timeInMillis
 
-        // Fetch tasks for the date range (start to end of the day)
+        // Fetch tasks
         CoroutineScope(Dispatchers.IO).launch {
             val database = AppDatabase.getDatabase(applicationContext)
             val tasks = database.todoDao().getTasksForDate(startOfDay, endOfDay)
 
             withContext(Dispatchers.Main) {
-                taskListAdapter.setTodos(tasks)  // Update the adapter with tasks for the selected date
+                taskListAdapter.setTodos(tasks)
             }
         }
     }
 
-    // Method to update the task status in the database
     private fun updateTodoInDatabase(updatedTodo: Todo) {
         CoroutineScope(Dispatchers.IO).launch {
             val database = AppDatabase.getDatabase(applicationContext)
-            database.todoDao().update(updatedTodo)  // Update task status in the database
-            loadTasksForDate(dateFormatter.format(Date()))  // Reload tasks for the current date
+            database.todoDao().update(updatedTodo)
+
+            // Reload tasks for the currently selected date
+            loadTasksForDate(selectedDate)
+        }
+    }
+
+    private fun navigateToEditActivity(todo: Todo) {
+        val intent = Intent(this, EditActivity::class.java).apply {
+            putExtra("todoId", todo.todo_id)
+            putExtra("todoName", todo.todo_name)
+            putExtra("todoDate", todo.todo_date)
+        }
+        startActivity(intent)
+    }
+
+    private fun setupNavigation() {
+        binding.navTugas.setOnClickListener {
+            startActivity(Intent(this, TugasActivity::class.java))
+        }
+
+        binding.navKalender.setOnClickListener {
+            // Do nothing since we are already in KalenderActivity
+        }
+
+        binding.navStatistik.setOnClickListener {
+            startActivity(Intent(this, StatistikActivity::class.java))
         }
     }
 }
