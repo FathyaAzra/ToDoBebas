@@ -1,13 +1,9 @@
 package com.example.todobebas
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.todobebas.database.AppDatabase
 import com.example.todobebas.database.Todo
 import kotlinx.coroutines.CoroutineScope
@@ -19,9 +15,9 @@ import java.util.*
 
 class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatChangeListener {
 
-    private var selectedDate: Long = System.currentTimeMillis() // To store the selected date
-    private var todoId: Int = -1 // Global task ID
-    private var repeatInterval: String? = null // Store the repeat interval
+    private var selectedDate: Long = System.currentTimeMillis()
+    private var todoId: Int = -1
+    private var repeatInterval: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +32,7 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
         todoId = intent.getIntExtra("todoId", -1)
         val todoName = intent.getStringExtra("todoName") ?: ""
         val todoDesc = intent.getStringExtra("todoDesc") ?: ""
-        val todoDate = intent.getLongExtra("todoDate", 0L)
+        val todoDate = intent.getLongExtra("todoDate", System.currentTimeMillis())
 
         // Set initial data in UI
         if (todoId != -1) {
@@ -52,13 +48,28 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
             finish()
         }
 
-        //button atur Waktu
+        // Button atur Waktu
         val btnSetTime: Button = findViewById(R.id.btnSetTime)
         btnSetTime.setOnClickListener {
-            val timePickerFragment = TimePickerDialogFragment { date, hour, minute ->
-                // Tangani data yang dipilih
-                println("Tanggal: $date, Waktu: $hour:${String.format("%02d", minute)}")
+            val timePickerFragment = TimePickerDialogFragment { selectedDateStr, selectedHour, selectedMinute ->
+                // Parsing the selected date from string to timestamp
+                val dateParts = selectedDateStr.split("/")
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.YEAR, dateParts[0].toInt())
+                calendar.set(Calendar.MONTH, dateParts[1].toInt() - 1) // Month starts from 0
+                calendar.set(Calendar.DAY_OF_MONTH, dateParts[2].toInt())
+
+                // Set hour and minute
+                calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+                calendar.set(Calendar.MINUTE, selectedMinute)
+
+                // Update the selected timestamp
+                selectedDate = calendar.timeInMillis
+
+                // Update the displayed time
+                tvSelectedTime.text = formatDate(selectedDate)
             }
+
             timePickerFragment.show(supportFragmentManager, "TimePickerDialogFragment")
         }
 
@@ -68,13 +79,15 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
             val updatedName = namaTask.text.toString().trim()
             val updatedDesc = descTask.text.toString().trim()
 
-            if (todoId != -1 && updatedName.isNotEmpty() && updatedDesc.isNotEmpty()) {
+            if (todoId != -1 && updatedName.isNotEmpty()) {
                 val updatedTodo = Todo(
                     todo_id = todoId,
                     todo_name = updatedName,
                     todo_desc = updatedDesc,
                     todo_date = selectedDate,
-                    todo_status = "not yet" // Default status
+                    todo_status = "not yet", // Default status
+                    hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY), // Default hour if needed
+                    minute = Calendar.getInstance().get(Calendar.MINUTE) // Default minute if needed
                 )
 
                 CoroutineScope(Dispatchers.IO).launch {
@@ -107,6 +120,8 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
             }
         }
 
+
+
         // Repeat Settings Button
         val buttonMengulang: Button = findViewById(R.id.btnMengulang)
         buttonMengulang.setOnClickListener {
@@ -116,8 +131,8 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
     }
 
     private fun formatDate(timestamp: Long): String {
-        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()) // Define the desired format
-        return formatter.format(Date(timestamp)) // Format the timestamp into a string
+        val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+        return formatter.format(Date(timestamp))
     }
 
     private fun repeatTasks(originalTodo: Todo) {
@@ -139,7 +154,9 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
                 todo_name = originalTodo.todo_name,
                 todo_desc = originalTodo.todo_desc,
                 todo_date = newDate,
-                todo_status = "not yet"
+                todo_status = "not yet", // Default status
+                hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY), // Default hour if needed
+                minute = Calendar.getInstance().get(Calendar.MINUTE) // Default minute if needed
             )
 
             // Insert the repeated task into the database
@@ -150,8 +167,13 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
         }
     }
 
+
     override fun onRepeatChanged(status: Boolean, repeatInterval: String?) {
-        // Handle repeat change
-        this
+        if (status) {
+            this.repeatInterval = repeatInterval
+        } else {
+            this.repeatInterval = null
+        }
     }
 }
+

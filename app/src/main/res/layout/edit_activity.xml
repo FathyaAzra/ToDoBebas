@@ -105,7 +105,7 @@
                     android:id="@+id/btnSetTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="120dp"
+                    android:layout_marginStart="7dp"
                     android:text="Atur"
                     android:backgroundTint="@color/grey"/>
             </LinearLayout>

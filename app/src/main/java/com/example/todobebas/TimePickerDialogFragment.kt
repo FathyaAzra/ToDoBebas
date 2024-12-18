@@ -20,6 +20,10 @@ class TimePickerDialogFragment(private val onTimeSelected: (String, Int, Int) ->
     private lateinit var btnCancel: Button
     private lateinit var btnDone: Button
 
+    private var selectedDate: String = "" // Variabel untuk menyimpan tanggal yang dipilih
+    private var selectedHour: Int = 0 // Variabel untuk menyimpan jam yang dipilih
+    private var selectedMinute: Int = 0 // Variabel untuk menyimpan menit yang dipilih
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,8 +54,8 @@ class TimePickerDialogFragment(private val onTimeSelected: (String, Int, Int) ->
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePicker = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                val formattedDate = String.format("%04d/%02d/%02d", selectedYear, selectedMonth + 1, selectedDay)
-                edTaskDate.setText(formattedDate)
+                selectedDate = String.format("%04d/%02d/%02d", selectedYear, selectedMonth + 1, selectedDay)
+                edTaskDate.setText(selectedDate) // Menampilkan tanggal yang dipilih
             }, year, month, day)
 
             datePicker.show()
@@ -64,9 +68,8 @@ class TimePickerDialogFragment(private val onTimeSelected: (String, Int, Int) ->
 
         // Tombol "Selesai" untuk mengambil nilai dari input
         btnDone.setOnClickListener {
-            val selectedHour = npHour.value
-            val selectedMinute = npMinute.value
-            val selectedDate = edTaskDate.text.toString()
+            selectedHour = npHour.value
+            selectedMinute = npMinute.value
 
             // Kirim data kembali melalui callback
             onTimeSelected(selectedDate, selectedHour, selectedMinute)
