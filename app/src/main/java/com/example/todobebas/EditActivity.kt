@@ -52,6 +52,16 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
             finish()
         }
 
+        //button atur Waktu
+        val btnSetTime: Button = findViewById(R.id.btnSetTime)
+        btnSetTime.setOnClickListener {
+            val timePickerFragment = TimePickerDialogFragment { date, hour, minute ->
+                // Tangani data yang dipilih
+                println("Tanggal: $date, Waktu: $hour:${String.format("%02d", minute)}")
+            }
+            timePickerFragment.show(supportFragmentManager, "TimePickerDialogFragment")
+        }
+
         // Save button logic
         val buttonSimpan: Button = findViewById(R.id.button_simpan)
         buttonSimpan.setOnClickListener {
