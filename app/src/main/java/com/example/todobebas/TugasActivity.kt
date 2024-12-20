@@ -25,6 +25,7 @@ class TugasActivity : AppCompatActivity() {
     private lateinit var adapter: TodoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 

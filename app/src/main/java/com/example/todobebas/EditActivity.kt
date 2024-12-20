@@ -128,6 +128,12 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
             val dialog = RepeatSettingsDialogFragment()
             dialog.show(supportFragmentManager, "RepeatSettingsDialog")
         }
+
+        val btnCatatan : Button = findViewById(R.id.btnCatatan)
+        btnCatatan.setOnClickListener {
+            val intent = Intent(this, CatatanActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun formatDate(timestamp: Long): String {
@@ -169,11 +175,13 @@ class EditActivity : AppCompatActivity(), RepeatSettingsDialogFragment.OnRepeatC
 
 
     override fun onRepeatChanged(status: Boolean, repeatInterval: String?) {
-        if (status) {
-            this.repeatInterval = repeatInterval
-        } else {
-            this.repeatInterval = null
-        }
+        val buttonMengulang: Button = findViewById(R.id.btnMengulang)
+
+        // Update the button text based on switch status
+        buttonMengulang.text = if (status) "Ya" else "Tidak"
+
+        // Save the repeat interval for later use (if any)
+        this.repeatInterval = repeatInterval
     }
 }
 

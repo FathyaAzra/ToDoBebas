@@ -17,7 +17,7 @@ class RepeatSettingsDialogFragment : DialogFragment() {
     }
 
     private var listener: OnRepeatChangeListener? = null
-    private var repeatInterval: String? = null  // To hold the selected repeat interval
+    var repeatInterval: String? = null  // To hold the selected repeat interval
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +33,9 @@ class RepeatSettingsDialogFragment : DialogFragment() {
             view.findViewById<Button>(R.id.btn_month),
             view.findViewById<Button>(R.id.btn_year)
         )
+
+        var repeatInterval: String? = null
+
         val btnCancel: Button = view.findViewById(R.id.btn_cancel)
         val btnDone: Button = view.findViewById(R.id.btn_done)
 
